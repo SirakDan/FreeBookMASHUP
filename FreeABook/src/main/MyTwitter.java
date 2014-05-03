@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
@@ -34,6 +35,40 @@ public class MyTwitter {
             Status status = twitter.updateStatus(text);
         } catch (TwitterException ex) {
             java.util.logging.Logger.getLogger(MyTwitter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void buscaTweets(String... requisitos){
+        Twitter twitter = new TwitterFactory().getInstance();
+        String queryFinal = "";
+        try {
+            twitter.setOAuthConsumer("C8iAYESEoYSkcswuTzT8tZvBA", "T1pA10hL7mlfAzXXSZ7lJxHuYnN1PcO7XuuY5F3oS7CgPgNbt2");
+            RequestToken requestToken = twitter.getOAuthRequestToken();
+
+            
+        } catch (TwitterException ex) {
+            System.err.println("Error al obtener RequestToken" + ex.getMessage());
+        }
+        if(readAccessToken()){
+            AccessToken accessToken = new AccessToken(authStrings[1], authStrings[2], Long.parseLong(authStrings[0]));
+            twitter.setOAuthAccessToken(accessToken);
+        } else {
+            System.err.println("ERROR, no se ha podido autenticar en la búsqueda");
+            return;
+        }
+        for(String requisito: requisitos){
+            queryFinal+= requisito + " ";
+        }
+        try {
+            Query query = new Query(queryFinal);
+            QueryResult result;
+            do {
+                result = twitter.search(query);
+                List<Status> tweets = result.getTweets();
+                for (Status tweet : tweets)
+                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+            }while((query = result.nextQuery()) != null);
+        }catch (TwitterException e){
+            e.printStackTrace();
         }
     }
     public void getAuth(){

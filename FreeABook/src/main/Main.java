@@ -18,7 +18,8 @@ public class Main {
     public static void main(String[] args) {
         MyTwitter mt = new MyTwitter();
         mt.getAuth();
-        mt.publicaTest("@imkissedbyfire HOLAAAAAAAAAA");
+        //mt.publicaTest("@imkissedbyfire HOLAAAAAAAAAA");
+        mt.buscaTweets("Que gusto con el", "pelo corto :D");
     }
     
 }
