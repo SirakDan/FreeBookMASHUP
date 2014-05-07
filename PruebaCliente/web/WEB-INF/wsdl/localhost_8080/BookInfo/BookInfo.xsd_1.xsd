@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://Info/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Info/">
+
+<xs:element name="getBook" type="tns:getBook"/>
+
+<xs:element name="getBookResponse" type="tns:getBookResponse"/>
+
+<xs:element name="getBooks" type="tns:getBooks"/>
+
+<xs:element name="getBooksByAuthor" type="tns:getBooksByAuthor"/>
+
+<xs:element name="getBooksByAuthorResponse" type="tns:getBooksByAuthorResponse"/>
+
+<xs:element name="getBooksByTitle" type="tns:getBooksByTitle"/>
+
+<xs:element name="getBooksByTitleResponse" type="tns:getBooksByTitleResponse"/>
+
+<xs:element name="getBooksResponse" type="tns:getBooksResponse"/>
+
+<xs:element name="init" type="tns:init"/>
+
+<xs:element name="initResponse" type="tns:initResponse"/>
+
+<xs:element name="insertBook" type="tns:insertBook"/>
+
+<xs:element name="insertBookResponse" type="tns:insertBookResponse"/>
+
+<xs:element name="listBooks" type="tns:listBooks"/>
+
+<xs:element name="listBooksResponse" type="tns:listBooksResponse"/>
+
+<xs:complexType name="getBooksByAuthor">
+<xs:sequence>
+<xs:element name="author" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getBooksByAuthorResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:book" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="book">
+<xs:sequence>
+<xs:element name="author" type="xs:string" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="latitude" type="xs:double"/>
+<xs:element name="longitude" type="xs:double"/>
+<xs:element name="photoURL" type="xs:string" minOccurs="0"/>
+<xs:element name="pickedUp" type="xs:boolean"/>
+<xs:element name="title" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listBooks">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="listBooksResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="init">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="initResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getBooks">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getBooksResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:book" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getBooksByTitle">
+<xs:sequence>
+<xs:element name="tittle" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getBooksByTitleResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:book" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertBook">
+<xs:sequence>
+<xs:element name="title" type="xs:string" minOccurs="0"/>
+<xs:element name="author" type="xs:string" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="photoUrl" type="xs:string" minOccurs="0"/>
+<xs:element name="pickedUp" type="xs:boolean"/>
+<xs:element name="latitude" type="xs:double"/>
+<xs:element name="longitude" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertBookResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getBook">
+<xs:sequence>
+<xs:element name="ID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getBookResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:book" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

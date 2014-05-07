@@ -29,15 +29,19 @@ import twitter4j.auth.RequestToken;
  */
 public class MyTwitter {
     String[] authStrings;
+    private List<Status> tweets;
     public void publicaTest(String text) {
         Twitter twitter = TwitterFactory.getSingleton();
         try {
+            double latitude = 40;
+            double longitude = 3;
+            GeoLocation gl = new GeoLocation(latitude, longitude);
             Status status = twitter.updateStatus(text);
         } catch (TwitterException ex) {
             java.util.logging.Logger.getLogger(MyTwitter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void buscaTweets(String... requisitos){
+    public List buscaTweets(String... requisitos){
         Twitter twitter = new TwitterFactory().getInstance();
         String queryFinal = "";
         try {
@@ -53,7 +57,7 @@ public class MyTwitter {
             twitter.setOAuthAccessToken(accessToken);
         } else {
             System.err.println("ERROR, no se ha podido autenticar en la búsqueda");
-            return;
+            return null;
         }
         for(String requisito: requisitos){
             queryFinal+= requisito + " ";
@@ -63,13 +67,20 @@ public class MyTwitter {
             QueryResult result;
             do {
                 result = twitter.search(query);
-                List<Status> tweets = result.getTweets();
-                for (Status tweet : tweets)
+                tweets = result.getTweets();
+                for (Status tweet : tweets){
                     System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                    if(tweet.getGeoLocation()!=null)
+                    System.out.println("Latitude: " + tweet.getGeoLocation().getLatitude() + 
+                            " Longitud: " + tweet.getGeoLocation().getLongitude());
+                }
             }while((query = result.nextQuery()) != null);
+            
         }catch (TwitterException e){
             e.printStackTrace();
         }
+        return  tweets;
+        
     }
     public void getAuth(){
         Twitter twitter = TwitterFactory.getSingleton();

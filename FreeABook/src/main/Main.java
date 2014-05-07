@@ -19,7 +19,7 @@ public class Main {
         MyTwitter mt = new MyTwitter();
         mt.getAuth();
         //mt.publicaTest("@imkissedbyfire HOLAAAAAAAAAA");
-        mt.buscaTweets("Que gusto con el", "pelo corto :D");
+        mt.buscaTweets("#LLSCP");
     }
     
 }
